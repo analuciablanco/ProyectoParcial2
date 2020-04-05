@@ -17,7 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/', 'NoticiaController@index')->name('front.noticias.index');
+Route::get('/ordenes/{id}', 'OrdenController@show')->name('front.noticias.show');
+Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/inicio', 'HomeController@inicio')->name('inicio');
+// atajo para establecer las 7 rutas básicas de un recurso.
+// index, create, store, show, edit, update, destroy.
+Route::resource('admin/ordenes','Admin\AdminOrdenController');
+Route::resource('admin/usuarios','Admin\AdminUsuarioController');
+
+Auth::routes(['register' => false]);

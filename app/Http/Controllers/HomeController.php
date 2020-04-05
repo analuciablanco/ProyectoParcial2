@@ -28,6 +28,6 @@ class HomeController extends Controller
 
     public function inicio()
     {
-        return view ('inicio');
+        return view ('layouts.admin.inicio');
     }
 }
