@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Orden;
+
 class OrdenController extends Controller
 {
     /**
@@ -13,7 +15,12 @@ class OrdenController extends Controller
      */
     public function index()
     {
-        //
+        $ordenes = Orden::all();
+
+        $argumentos = array();
+        $argumentos['ordenes'] = $ordenes;
+
+        return view('ordenes.index', $argumentos);
     }
 
     /**
@@ -45,7 +52,12 @@ class OrdenController extends Controller
      */
     public function show($id)
     {
-        //
+        $ordenes = Orden::find($id);
+
+        $argumentos = array();
+        $argumentos['ordenes'] = $ordenes;
+
+        return view('ordenes.index', $argumentos);
     }
 
     /**

@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'NoticiaController@index')->name('front.noticias.index');
-Route::get('/ordenes/{id}', 'OrdenController@show')->name('front.noticias.show');
+Route::get('/', 'OrdenController@index')->name('front.ordenes.index');
+Route::get('/ordenes/{id}', 'OrdenController@show')->name('front.ordenes.show');
 Route::get('/admin', 'AdminController@dashboard')->name('admin.dashboard');
 
 // atajo para establecer las 7 rutas básicas de un recurso.
