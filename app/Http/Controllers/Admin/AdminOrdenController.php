@@ -32,6 +32,7 @@ class AdminOrdenController extends Controller
     {
         $orden = new Orden();
 
+        $orden->id_user = $request->user()->id;
         $orden->orden = $request->input('txtOrden');
         $orden->nombre_cliente = $request->input('txtCliente');
         $orden->direccion = $request->input('txtDireccion');
@@ -86,8 +87,11 @@ class AdminOrdenController extends Controller
         $orden = Orden::find($id);
 
         if($orden) {
-            $orden->titulo = $request->input('txtTitulo');
-            $orden->cuerpo = $request->input('txtCuerpo');
+            $orden->orden = $request->input('txtOrden');
+            $orden->nombre_cliente = $request->input('txtCliente');
+            $orden->direccion = $request->input('txtDireccion');
+            $orden->telefono = $request->input('txtTelefono');
+            $orden->estado = $request->input('txtEstado');
 
             if($orden->save()) {
                 return redirect()->

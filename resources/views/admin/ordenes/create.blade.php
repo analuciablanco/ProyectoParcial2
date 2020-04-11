@@ -26,7 +26,7 @@
     href="{{ route('ordenes.index') }}">
     
     <i class="fas fa-arrow-left"></i> 
-    Volver a lista de noticias</a>
+    Volver a lista de ordenes</a>
 
 <div class="container-fluid">
     <div class="row">

@@ -102,12 +102,11 @@
                 <div class="modal-body">
                     @csrf
                     @method('DELETE')
-                    <p class="text-center">¿Seguro que quieres eliminar la orden <b>#<span id="spn_ordenID">{{ $orden->id }}</span></b>?</p>
                     <!-- PREGUNTAR
                             POR
                         ESTA PARTE
                         EL MIÉRCOLES -->
-                    <p class="text-center">"<span>{{ $orden->orden }}</span>"</p>
+                    <p class="text-center">¿Seguro que quieres eliminar al usuario <b>id: <span id="spn_ordenID">{{ $orden->id }}</span></b>?</p>
                 </div>
 
                 <div class="modal-footer justify-content-between">
