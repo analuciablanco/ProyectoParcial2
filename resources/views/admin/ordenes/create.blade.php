@@ -40,29 +40,39 @@
                     <form method="POST" enctype="multipart/form-data" action="{{ route('ordenes.store') }}">
 
                         @csrf
-                        <div class="form-group">
-                            <label>Orden</label>
-                            <input type="text" name="txtOrden" class="form-control"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Orden</label>
+                            <div class="col-md-11">
+                                <input type="text" name="txtOrden" class="form-control"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Cliente</label>
-                            <input type="text" name="txtCliente" class="form-control"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Cliente</label>
+                            <div class="col-md-11">
+                             <input type="text" name="txtCliente" class="form-control"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Dirección</label>
-                            <input type="text" name="txtDireccion" class="form-control"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Dirección</label>
+                            <div class="col-md-11">
+                                <input type="text" name="txtDireccion" class="form-control"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Teléfono</label>
-                            <input type="text" name="txtTelefono" class="form-control"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Teléfono</label>
+                            <div class="col-md-11">
+                                <input type="text" name="txtTelefono" class="form-control"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <input type="text" name="txtEstado" class="form-control" value="Pendiente"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Estado</label>
+                            <div class="col-md-11">
+                                <input type="text" name="txtEstado" class="form-control" value="Pendiente"/>
+                            </div>
                         </div>
 
                         <div class="form-group"> 

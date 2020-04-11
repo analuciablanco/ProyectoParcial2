@@ -29,50 +29,41 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Lista de pedidos</h3>
+                    <h3 class="card-title">Lista de usuarios</h3>
                 </div>
                 <div class="card-body">
                 
-                    <a href="{{ route('ordenes.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"> Registrar pedido</i>
+                    <a href="{{ route('usuarios.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"> Registrar usuario</i>
                     </a>
 
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Orden</th>
-                                <th>Estado</th>
-                                <th>Cliente</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
-                                <th>Fecha de pedido</th>
+                                <th>Usuario</th>
+                                <th>Correo</th>
+                                <th>Tipo de usuario</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Aquí van las noticias xd -->
-                            @foreach($ordenes as $orden)
+                            @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $orden->id }}</td>
-                                    <td>{{ $orden->orden }}</td>
-                                    <td>{{ $orden->estado }}</td>
-                                    <td>{{ $orden->nombre_cliente }}</td>
-                                    <td>{{ $orden->telefono }}</td>
-                                    <td>{{ $orden->direccion }}</td>
-                                    <td>{{ $orden->created_at }}</td>
+                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $usuario->email }}</td>
+                                    <td>{{ $usuario->user_type }}</td>
                                     <td>
-                                        <a href="{{ route('ordenes.show', $orden->id) }}" class="btn btn-primary">
+                                        <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-primary">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('ordenes.edit', $orden->id) }}" class="btn btn-primary">
+                                        <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
                                         @csrf
                                         @method('DELETE')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$orden->id}})" 
+                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usuario->id}})" 
                                             data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
 
                                     </td>
@@ -93,7 +84,7 @@
         <div class="modal-content">
             <form action="" id="deleteForm" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Eliminar Orden</h4>
+                    <h4 class="modal-title">Eliminar Usuario</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,7 +97,7 @@
                             POR
                         ESTA PARTE
                         EL MIÉRCOLES -->
-                    <p class="text-center">¿Seguro que quieres eliminar al usuario <b>id: <span id="spn_ordenID">{{ $orden->id }}</span></b>?</p>
+                    <p class="text-center">¿Seguro que quieres eliminar al usuario <b>id: <span id="spn_usuarioID">{{ $usuario->id }}</span></b>?</p>
                 </div>
 
                 <div class="modal-footer justify-content-between">
@@ -131,10 +122,10 @@
     function deleteData(id)
     {
         var id = id;
-        var url = '{{ route("ordenes.destroy", ":id") }}';
+        var url = '{{ route("usuarios.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
-        $("#spn_ordenID").text(id);
+        $("#spn_usuarioID").text(id);
     }
     function formSubmit()
     {

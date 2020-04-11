@@ -31,13 +31,12 @@ class AdminUsuarioController extends Controller
     public function store(Request $request)
     {
         // where(columna, valor)
-        //first ecuetra el primer registro que coincida, si no encuentra regresa NULL
         $verification = Usuario::where('email', $request->input('txtEmail'))->first();
 
         if($verification) {
             return redirect()->
                 route('usuarios.create')->
-                with('error','el correo ya existe');
+                with('error','el correo ya existe en los registros');
         }
 
         $usuario = new Usuario();
@@ -45,6 +44,14 @@ class AdminUsuarioController extends Controller
         $usuario->name = $request->input('txtName');
         $usuario->email = $request->input('txtEmail');
         $usuario->password = bcrypt($request->input('txtPassword'));
+        $usuario->user_type = $request->input('txtUserType');
+
+        if($request->hasFile('imgProfile')) {
+            $archivoProfile = $request->file('imgProfile');
+            $rutaArchivo = $archivoProfile->store('public/perfil');
+            $rutaArchivo = substr($rutaArchivo, 13);
+            $usuario->picture = $rutaArchivo;
+        }
 
         if($usuario->save()) {
             return redirect()->
@@ -53,7 +60,7 @@ class AdminUsuarioController extends Controller
         }
 
         return redirect()->route('usuarios.index')->
-            with('error','No se pudo guardar el usuario');           
+            with('error','No se pudo guardar al usuario');           
     }
 
     public function show($id)

@@ -51,7 +51,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Aquí van las noticias xd -->
                             @foreach($ordenes as $orden)
                                 <tr>
                                     <td>{{ $orden->id }}</td>
