@@ -13,9 +13,16 @@ class AdminOrdenController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $ordenes = Orden::all();
+        $criterio = $request->input('criterio');
+        $ordenes = array();
+        if($criterio) {
+            $ordenes = Orden::where('estado', 'LIKE', '%.$criterio.%')->get();
+        }
+        else {
+            $ordenes = Orden::all();
+        }
 
         $argumentos = array();
         $argumentos['ordenes'] = $ordenes;
@@ -38,6 +45,13 @@ class AdminOrdenController extends Controller
         $orden->direccion = $request->input('txtDireccion');
         $orden->telefono = $request->input('txtTelefono');
         $orden->estado = $request->input('txtEstado');
+
+        if($request->hasFile('imgFoto')) {
+            $archivoProfile = $request->file('imgFoto');
+            $rutaArchivo = $archivoProfile->store('public\perfil');
+            $rutaArchivo = substr($rutaArchivo, 14);
+            $orden->foto = $rutaArchivo;
+        }
 
         if($orden->save()) {
             return redirect()->

@@ -67,11 +67,31 @@
                                 <input id="confirm_password" type="password" name="txtPassword" class="form-control" value="{{ $usuario->password }}"/>
                             </div>
                         </div>
-
+                        
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Tipo de usuario</label>
                             <div class="col-md-10">
-                                <input type="text" name="txtUserType" class="form-control" value="{{ $usuario->user_type }}"/>
+                                <select name="txtUserType" class="form-control" data-toggle="dropdown" aria-expanded="false">
+                                    <option value="{{ $usuario->user_type }}" class="dropdown-item" role="presentation">{{ $usuario->user_type }}</option>
+                                    <option value="Administrador" class="dropdown-item" role="presentation">Administrador</option>
+                                    <option value="Capturador" class="dropdown-item" role="presentation">Capturador</option>
+                                    <option value="Repartidor" class="dropdown-item" role="presentation">Repartidor</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Foto de perfil</label>
+                            <div class="col-md-1">
+                                @if($usuario->picture)
+                                    <a href="/storage/perfil/{{ $usuario->picture }}" target="_blank">
+                                        <img class="border rounded-circle img-profile" src="/storage/perfil/{{ $usuario->picture }}" height="40" width="40">
+                                    </a>
+                                @else
+                                @endif
+                            </div>
+                            <div class="col-md-9">
+                                <input type="file" name="imgProfile" class="form-control"/>
                             </div>
                         </div>
 

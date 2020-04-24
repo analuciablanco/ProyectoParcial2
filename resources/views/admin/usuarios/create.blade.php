@@ -37,7 +37,7 @@
                 </div>
                 <div class="card-body">
 
-                <form method="POST" action="{{ route('usuarios.store') }}">
+                <form method="POST" action="{{ route('usuarios.store') }}" enctype="multipart/form-data">
 
                         @csrf
                         <div class="form-group row">
@@ -69,10 +69,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label class="col-md-2 col-form-label">Tipo de usuario</label>
                             <div class="col-md-10">
                                 <input type="text" name="txtUserType" class="form-control" value="2"/>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Tipo de usuario</label>
+                            <div class="col-md-10">
+                                <select name="txtUserType" class="form-control" data-toggle="dropdown" aria-expanded="false">
+                                    <option value="Administrador" class="dropdown-item" role="presentation">Administrador</option>
+                                    <option value="Capturador" class="dropdown-item" role="presentation">Capturador</option>
+                                    <option value="Repartidor" class="dropdown-item" role="presentation">Repartidor</option>
+                                </select>
                             </div>
                         </div>
 

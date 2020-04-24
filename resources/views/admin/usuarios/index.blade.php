@@ -49,7 +49,8 @@
                         <tbody>
                             @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{ $usuario->name }}</td>
+                                    <td><img class="border rounded-circle img-profile" src="/storage/perfil/{{ $usuario->picture }}" height="40" width="40"> 
+                                        {{ $usuario->name }}</td>
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->user_type }}</td>
                                     <td>
@@ -63,7 +64,7 @@
 
                                         @csrf
                                         @method('DELETE')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usuario->id}})" 
+                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$usuario->id}}, '{{$usuario->email}}')" 
                                             data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
 
                                     </td>
@@ -95,9 +96,8 @@
                     @method('DELETE')
                     <!-- PREGUNTAR
                             POR
-                        ESTA PARTE
-                        EL MIÉRCOLES -->
-                    <p class="text-center">¿Seguro que quieres eliminar al usuario <b>id: <span id="spn_usuarioID">{{ $usuario->id }}</span></b>?</p>
+                        ESTA PARTE -->
+                    <p class="text-center">¿Seguro que quieres eliminar al usuario: <b> <span id="spn_usuarioID"></span></b>?</p>
                 </div>
 
                 <div class="modal-footer justify-content-between">
@@ -119,13 +119,14 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    function deleteData(id)
+    function deleteData(id, email)
     {
+        console.log(email);
         var id = id;
         var url = '{{ route("usuarios.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
-        $("#spn_usuarioID").text(id);
+        $("#spn_usuarioID").text(email);
     }
     function formSubmit()
     {

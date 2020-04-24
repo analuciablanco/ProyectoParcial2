@@ -71,7 +71,19 @@
                         <div class="form-group row">
                             <label class="col-md-1 col-form-label">Estado</label>
                             <div class="col-md-11">
-                                <input type="text" name="txtEstado" class="form-control" value="Pendiente"/>
+                                <select name="txtEstado" class="form-control" data-toggle="dropdown" aria-expanded="false">
+                                    <option value="Pendiente" class="dropdown-item" role="presentation">Pendiente</option>
+                                    <option value="En proceso" class="dropdown-item" role="presentation">En proceso</option>
+                                    <option value="En camino" class="dropdown-item" role="presentation">En camino</option>
+                                    <option value="Entregado" class="dropdown-item" role="presentation">Entregado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Foto de orden</label>
+                            <div class="col-md-10">
+                                <input type="file" name="imgFoto" class="form-control"/>
                             </div>
                         </div>
 

@@ -19,3 +19,14 @@ Route::middleware('auth:api')->
 
 Route::apiResource('ordenes', 'API\OrdenesApiController');
 
+Route::middleware('auth:api', 'capturador.api')->
+    get('/servicio',
+    function (Request $request) {
+        return ['message' => 'prueba para limitar a usuarios, usando como ejemplo al usuario 2-capturador'];
+    });
+
+Route::get('/solocapturadores',
+    function() {
+        return ['message' => 'Funcion exclusiva para CAPTURADOR'];
+    })->name('api.solocapturadores');
+

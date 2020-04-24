@@ -33,9 +33,24 @@
                 </div>
                 <div class="card-body">
                 
+                @if(Auth::user()->id_user_type != 3)
                     <a href="{{ route('ordenes.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus"> Registrar pedido</i>
                     </a>
+                @endif
+
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="criterio" id="txtCriterio">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                     <table class="table">
                         <thead>
@@ -69,10 +84,12 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
 
+                                    @if(Auth::user()->id_user_type != 3)
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$orden->id}})" 
                                             data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                    @endif
 
                                     </td>
                                 </tr>
@@ -102,10 +119,6 @@
                     @csrf
                     @method('DELETE')
                     <p class="text-center">¿Seguro que quieres eliminar la orden <b>#<span id="spn_ordenID">{{ $orden->id }}</span></b>?</p>
-                    <!-- PREGUNTAR
-                            POR
-                        ESTA PARTE
-                        EL MIÉRCOLES -->
                     <p class="text-center">"<span>{{ $orden->orden }}</span>"</p>
                 </div>
 

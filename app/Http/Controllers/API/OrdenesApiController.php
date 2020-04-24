@@ -78,7 +78,17 @@ class OrdenesApiController extends Controller
      */
     public function show($id)
     {
-        //
+        $orden = Orden::find($id);
+
+        if($orden) {
+            $argumentos= array();
+            $argumentos['orden'] = $orden;
+            
+            $respuesta = array();
+            $respuesta = $argumentos;
+            return $respuesta;
+        }
+
     }
 
     /**
@@ -90,7 +100,22 @@ class OrdenesApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editarOrden = Orden::find($id);
+
+        $editarOrden->id_user = $request->user()->id;
+        $editarOrden->nombre_cliente = $request->input('nombre_cliente');
+        $editarOrden->direccion = $request->input('direccion');
+        $editarOrden->telefono = $request->input('telefono');
+        $editarOrden->orden = $request->input('orden');
+        $editarOrden->estado = $request->input('estado');
+
+        $respuesta = array();
+        $respuesta['exito'] = false;
+        if($editarOrden -> save()){
+            $respuesta['exito'] = true;
+        }
+
+        return $respuesta;
     }
 
     /**

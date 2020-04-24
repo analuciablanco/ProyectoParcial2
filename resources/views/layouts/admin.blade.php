@@ -5,16 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@yield('titulo')</title>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/fonts/fontawesome5-overrides.min.css">
     @yield('estilos')
 </head>
 
@@ -23,21 +18,26 @@
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{{ route('ordenes.index') }}">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-icon"><i class="fas fa-mug-hot"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>Cafetería</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                @if(Auth::user()->id_user_type != 3)
                     <li class="nav-item has-treeview" role="presentation">
                         <a class="nav-link" href="{{ route('ordenes.create') }}">
                             <i class="fas fa-tachometer-alt"></i><span>Registrar pedido</span>
                         </a>
                     </li>
+                @endif
                     <li class="nav-item has-treeview" role="presentation">
                         <a class="nav-link" href="{{ route('ordenes.index') }}">
                             <i class="fas fa-tachometer-alt"></i><span>Lista de pedidos</span>
                         </a>
                     </li>
+
+
+                @if(Auth::user()->id_user_type == 1)
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="{{ route('usuarios.create') }}">
                             <i class="fas fa-user"></i><span>Nuevo usuario</span>
@@ -48,6 +48,7 @@
                             <i class="fas fa-user"></i><span>Lista de usuarios</span>
                         </a>
                     </li>
+                @endif
                     
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -73,7 +74,7 @@
                                     <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
                                         <span class="d-none d-lg-inline mr-2 text-gray-600 small">{{Auth::user()->name}}
                                         </span>
-                                        <img class="border rounded-circle img-profile" src="assets/img/avatars/{{Auth::user()->picture}}">
+                                        <img class="border rounded-circle img-profile" src="/storage/perfil/{{Auth::user()->picture}}">
                                     </a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
                                         <a class="dropdown-item" id="linkLogout" role="presentation" href="{{route('logout')}}">
@@ -99,28 +100,10 @@
             </div>
         </footer>
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/chart.min.js"></script>
-    <script src="/assets/js/bs-init.js"></script>
-    <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="/assets/js/theme.js"></script>
-    <script src="/plugins/jquery/jquery.min.js"></script>
-    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <script>$.widget.bridge('uibutton', $.ui.button)</script>
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/plugins/chart.js/Chart.min.js"></script>
-    <script src="/plugins/sparklines/sparkline.js"></script>
-    <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <script src="/plugins/moment/moment.min.js"></script>
-    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="/plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="/dist/js/adminlte.js"></script>
-    <script src="/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="/js/theme.js"></script>
 
     <script>
         function doClickLinkLogout(e) {

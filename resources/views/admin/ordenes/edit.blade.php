@@ -59,9 +59,17 @@
                             <input type="text" name="txtTelefono" value="{{ $orden->telefono }}" class="form-control"/>
                         </div>
 
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <input type="text" name="txtEstado" value="{{ $orden->estado }}" class="form-control"/>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Estado</label>
+                            <div class="col-md-11">
+                                <select name="txtEstado" class="form-control" data-toggle="dropdown" aria-expanded="false">
+                                    <option value="{{ $orden->estado }}" class="dropdown-item" role="presentation">{{ $orden->estado }}</option>
+                                    <option value="Pendiente" class="dropdown-item" role="presentation">Pendiente</option>
+                                    <option value="En proceso" class="dropdown-item" role="presentation">En proceso</option>
+                                    <option value="En camino" class="dropdown-item" role="presentation">En camino</option>
+                                    <option value="Entregado" class="dropdown-item" role="presentation">Entregado</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group"> 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Usuario;
 
@@ -11,6 +12,7 @@ class AdminUsuarioController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
@@ -41,15 +43,15 @@ class AdminUsuarioController extends Controller
 
         $usuario = new Usuario();
 
+        $usuario->user_type = $request->input('txtUserType');
         $usuario->name = $request->input('txtName');
         $usuario->email = $request->input('txtEmail');
         $usuario->password = bcrypt($request->input('txtPassword'));
-        $usuario->user_type = $request->input('txtUserType');
-
+        
         if($request->hasFile('imgProfile')) {
             $archivoProfile = $request->file('imgProfile');
-            $rutaArchivo = $archivoProfile->store('public/perfil');
-            $rutaArchivo = substr($rutaArchivo, 13);
+            $rutaArchivo = $archivoProfile->store('public\perfil');
+            $rutaArchivo = substr($rutaArchivo, 14);
             $usuario->picture = $rutaArchivo;
         }
 
@@ -100,9 +102,20 @@ class AdminUsuarioController extends Controller
         $usuario = Usuario::find($id);
 
         if($usuario) {
+            $usuario->user_type = $request->input('txtUserType');
             $usuario->name = $request->input('txtName');
             $usuario->email = $request->input('txtEmail');
-            $usuario->password = bcrypt($request->input('txtPassword'));
+            if($usuario->password != $request->input('txtPassword'))
+            {
+                $usuario->password = bcrypt($request->input('txtPassword'));
+            }
+            
+            if($request->hasFile('imgProfile')) {
+                $archivoProfile = $request->file('imgProfile');
+                $rutaArchivo = $archivoProfile->store('public\perfil');
+                $rutaArchivo = substr($rutaArchivo, 14);
+                $usuario->picture = $rutaArchivo;
+            }
 
             if($usuario->save()) {
                 return redirect()->
