@@ -39,6 +39,7 @@
                     <p>Nombre: {{ $usuario->name }}</p>
                     <p>Correo: {{ $usuario->email }}</p>
                     <p>Tipo de usuario: {{ $usuario->user_type }}</p>
+                    <p><img src="/storage/perfil/{{ $usuario->picture }}" alt=""></p>
                 </div>
             </div>
         </div>

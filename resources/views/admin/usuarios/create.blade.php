@@ -80,9 +80,9 @@
                             <label class="col-md-2 col-form-label">Tipo de usuario</label>
                             <div class="col-md-10">
                                 <select name="txtUserType" class="form-control" data-toggle="dropdown" aria-expanded="false">
-                                    <option value="Administrador" class="dropdown-item" role="presentation">Administrador</option>
-                                    <option value="Capturador" class="dropdown-item" role="presentation">Capturador</option>
-                                    <option value="Repartidor" class="dropdown-item" role="presentation">Repartidor</option>
+                                    <option value="1" class="dropdown-item" role="presentation">Administrador</option>
+                                    <option value="2" class="dropdown-item" role="presentation">Capturador</option>
+                                    <option value="3" class="dropdown-item" role="presentation">Repartidor</option>
                                 </select>
                             </div>
                         </div>

@@ -42,7 +42,6 @@
                     <div><b>Teléfono:</b> {{ $orden->telefono }}</div>
                     <div><b>Dirección:</b> {{ $orden->direccion }}</div>
                     <div><b>Fecha de pedido:</b> {{ $orden->created_at }}</div>
-                    <div><img src="/storage/perfil/{{ $orden->foto }}" alt=""></div>
                 </div>
             </div>
         </div>

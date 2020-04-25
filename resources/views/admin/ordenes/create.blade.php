@@ -80,13 +80,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Foto de orden</label>
-                            <div class="col-md-10">
-                                <input type="file" name="imgFoto" class="form-control"/>
-                            </div>
-                        </div>
-
                         <div class="form-group"> 
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>

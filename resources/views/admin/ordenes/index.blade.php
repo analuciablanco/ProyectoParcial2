@@ -28,76 +28,78 @@
             @endif
 
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Lista de pedidos</h3>
-                </div>
-                <div class="card-body">
-                
-                @if(Auth::user()->id_user_type != 3)
-                    <a href="{{ route('ordenes.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"> Registrar pedido</i>
-                    </a>
-                @endif
+                <div class="row">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de pedidos</h3>
+                    </div>
+                    <div class="card-body filterable">
+                    
+                    @if(Auth::user()->id_user_type != 3)
+                        <a href="{{ route('ordenes.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"> Registrar pedido</i>
+                        </a>
+                    @endif
 
-                    <form>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" name="criterio" id="txtCriterio">
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Buscar</button>
+                        <!-- <form> -->
+                            <div class="row">
+                                <div class="col-md-12 pull-right">
+                                    <!-- <div class="form-group">
+                                        <input class="form-control" type="text" name="criterio" id="txtCriterio">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Buscar</button>
+                                    </div> -->
+                                    <button class="btn btn-info btn-filter">Filtros</button>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        <!-- </form> -->
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Orden</th>
-                                <th>Estado</th>
-                                <th>Cliente</th>
-                                <th>Dirección</th>
-                                <th>Teléfono</th>
-                                <th>Fecha de pedido</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($ordenes as $orden)
-                                <tr>
-                                    <td>{{ $orden->id }}</td>
-                                    <td>{{ $orden->orden }}</td>
-                                    <td>{{ $orden->estado }}</td>
-                                    <td>{{ $orden->nombre_cliente }}</td>
-                                    <td>{{ $orden->telefono }}</td>
-                                    <td>{{ $orden->direccion }}</td>
-                                    <td>{{ $orden->created_at }}</td>
-                                    <td>
-                                        <a href="{{ route('ordenes.show', $orden->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-
-                                        <a href="{{ route('ordenes.edit', $orden->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-
-                                    @if(Auth::user()->id_user_type != 3)
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$orden->id}})" 
-                                            data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
-                                    @endif
-
-                                    </td>
+                        <table class="table">
+                            <thead>
+                                <tr class="filters">
+                                    <th>ID</th>
+                                    <th><input type="text" class="form-control" placeholder="Orden" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Estado" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Cliente" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Dirección" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Teléfono" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Fecha de pedido" disabled></th>
+                                    <th>Acciones</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+                            <tbody>
+                                @foreach($ordenes as $orden)
+                                    <tr>
+                                        <td>{{ $orden->id }}</td>
+                                        <td>{{ $orden->orden }}</td>
+                                        <td>{{ $orden->estado }}</td>
+                                        <td>{{ $orden->nombre_cliente }}</td>
+                                        <td>{{ $orden->direccion }}</td>
+                                        <td>{{ $orden->telefono }}</td>
+                                        <td>{{ $orden->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route('ordenes.show', $orden->id) }}" class="btn btn-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
 
+                                            <a href="{{ route('ordenes.edit', $orden->id) }}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                        @if(Auth::user()->id_user_type != 3)
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$orden->id}})" 
+                                                data-target="#DeleteModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                        @endif
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -153,5 +155,52 @@
     {
         $("#deleteForm").submit();
     }
+ </script>
+
+ <script>
+     $(document).ready(function(){
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            console.log("Entrada de boton xD");
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            console.log("Están disabled xd");
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        /* Dirtiest filter function ever ;) */
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        }
+    });
+});
  </script>
 @endsection

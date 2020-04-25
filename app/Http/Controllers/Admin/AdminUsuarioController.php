@@ -43,7 +43,25 @@ class AdminUsuarioController extends Controller
 
         $usuario = new Usuario();
 
-        $usuario->user_type = $request->input('txtUserType');
+        $usuario->id_user_type = $request->input('txtUserType');
+
+        if($request->input('txtUserType') == '1')
+        {
+            $usuario->user_type = 'Administrador';
+        }
+        else if($request->input('txtUserType') == '2')
+        {
+            $usuario->user_type = 'Capturador';
+        }
+        else if($request->input('txtUserType') == '3')
+        {
+            $usuario->user_type = 'Repartidor';
+        }
+        else 
+        {
+            $usuario->user_type = '---';
+        }
+
         $usuario->name = $request->input('txtName');
         $usuario->email = $request->input('txtEmail');
         $usuario->password = bcrypt($request->input('txtPassword'));
@@ -102,7 +120,25 @@ class AdminUsuarioController extends Controller
         $usuario = Usuario::find($id);
 
         if($usuario) {
-            $usuario->user_type = $request->input('txtUserType');
+            $usuario->id_user_type = $request->input('txtUserType');
+
+            if($request->input('txtUserType') == '1')
+            {
+                $usuario->user_type = 'Administrador';
+            }
+            else if($request->input('txtUserType') == '2')
+            {
+                $usuario->user_type = 'Capturador';
+            }
+            else if($request->input('txtUserType') == '3')
+            {
+                $usuario->user_type = 'Repartidor';
+            }
+            else 
+            {
+                $usuario->user_type = '---';
+            }
+
             $usuario->name = $request->input('txtName');
             $usuario->email = $request->input('txtEmail');
             if($usuario->password != $request->input('txtPassword'))

@@ -45,6 +45,8 @@ class AdminOrdenController extends Controller
         $orden->direccion = $request->input('txtDireccion');
         $orden->telefono = $request->input('txtTelefono');
         $orden->estado = $request->input('txtEstado');
+        $orden->created_by = $request->user()->name;
+        $orden->updated_by = $request->user()->name;
 
         if($request->hasFile('imgFoto')) {
             $archivoProfile = $request->file('imgFoto');
@@ -106,6 +108,7 @@ class AdminOrdenController extends Controller
             $orden->direccion = $request->input('txtDireccion');
             $orden->telefono = $request->input('txtTelefono');
             $orden->estado = $request->input('txtEstado');
+            $orden->updated_by = $request->user()->name;
 
             if($orden->save()) {
                 return redirect()->
